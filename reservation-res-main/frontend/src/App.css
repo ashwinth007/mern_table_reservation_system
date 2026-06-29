@@ -160,10 +160,6 @@ nav svg {
     border-radius: 0;
   }
 }
-/**********************************************************************************************************************/
-
-/********************** HERO SECTION COMPONENT STYLING **************************/
-/**********************************************************************************************************************/
 .heroSection {
   display: flex;
   flex-direction: column;
@@ -1120,3 +1116,110 @@ footer .container .banner .right {
   }
 }
 /**********************************************************************************************************************/
+.booking-ui-section {
+  padding: 50px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.booking-ui-container {
+  max-width: 1500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.booking-ui-heading {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.booking-ui-heading h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.booking-ui-heading p {
+  color: #333;
+  font-size: 16px;
+  font-weight: 300;
+  margin-top: 8px;
+}
+
+.booking-ui-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.booking-ui-card {
+  background: #fff;
+  width: 23%;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.booking-ui-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.booking-ui-card h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.booking-ui-card p {
+  font-size: 14px;
+  color: #555;
+  margin: 4px 0;
+  display: flex;
+  align-items: center;
+}
+
+.booking-ui-icon {
+  margin-right: 6px;
+  color: #555;
+}
+
+.booking-ui-status {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.bg-green-500 { background-color: #22c55e; }
+.bg-yellow-500 { background-color: #eab308; }
+.bg-red-500 { background-color: #ef4444; }
+.bg-gray-500 { background-color: #6b7280; }
+
+
+@media (max-width: 1200px) {
+  .booking-ui-card { width: 30%; }
+}
+
+@media (max-width: 900px) {
+  .booking-ui-card { width: 45%; }
+}
+
+@media (max-width: 600px) {
+  .booking-ui-card { width: 90%; }
+}
+
+.booking-ui-loading {
+  text-align: center;
+  font-size: 18px;
+  color: #555;
+  margin-top: 50px;
+}

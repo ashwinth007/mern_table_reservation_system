@@ -1,13 +1,9 @@
 import express from "express";
-import {
-  send_reservation,
-  getAllReservations,
-  updateReservation,
-} from "../controller/reservation.js";
-
 const router = express.Router();
-
-router.post("/send", send_reservation);
+import { send_reservation } from "../controller/reservation.js";
+import { getAllReservations } from "../controller/reservation.js";
+import { updateReservation } from "../controller/reservation.js";
+router.post("/", send_reservation);
 router.get("/", getAllReservations);
 router.put("/:id", updateReservation);
 

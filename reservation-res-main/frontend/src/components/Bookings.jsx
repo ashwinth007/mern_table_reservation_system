@@ -1,53 +1,68 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { FaCalendarAlt, FaClock, FaEnvelope, FaPhone } from "react-icons/fa";
 
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
+
   const fetchBookings = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/v1/reservation/");
-      setBookings(res.data.reservations); 
+      const res = await axios.get("http://localhost:5000/api/reservations/");
+      setBookings(res.data.reservations);
       setLoading(false);
     } catch (err) {
       console.error("Error fetching bookings:", err);
       setLoading(false);
     }
   };
+
   useEffect(() => {
     fetchBookings();
   }, []);
 
-  if (loading) return <p>Loading bookings...</p>;
+  const getStatusColor = (status) => {
+    switch (status?.toLowerCase()) {
+      case "confirmed":
+        return "bg-green-500";
+      case "pending":
+        return "bg-yellow-500";
+      case "cancelled":
+        return "bg-red-500";
+      default:
+        return "bg-gray-500";
+    }
+  };
+
+  if (loading) {
+    return (
+      <p className="booking-ui-loading">Loading bookings...</p>
+    );
+  }
 
   return (
-    <div>
-      <h1>All Bookings</h1>
-      <table border="1" cellPadding="8" cellSpacing="0">
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Phone</th>
-          </tr>
-        </thead>
-        <tbody>
+    <section className="booking-ui-section">
+      <div className="booking-ui-container">
+        <div className="booking-ui-heading">
+          <h1>All Bookings</h1>
+          <p>View your reservations with details like name, contact info, date, time, and status.</p>
+        </div>
+        <div className="booking-ui-grid">
           {bookings.map((b) => (
-            <tr key={b._id}>
-              <td>{b.firstName}</td>
-              <td>{b.lastName}</td>
-              <td>{b.email}</td>
-              <td>{b.date}</td>
-              <td>{b.time}</td>
-              <td>{b.phone}</td>
-            </tr>
+            <div className="booking-ui-card" key={b._id}>
+              <h3>{b.firstName} {b.lastName}</h3>
+              <p><FaEnvelope className="booking-ui-icon" /> {b.email}</p>
+              <p><FaPhone className="booking-ui-icon" /> {b.phone}</p>
+              <p><FaCalendarAlt className="booking-ui-icon" /> {b.date}</p>
+              <p><FaClock className="booking-ui-icon" /> {b.time}</p>
+              <span className={`booking-ui-status ${getStatusColor(b.status)}`}>
+                {b.status || "Booked"}
+              </span>
+            </div>
           ))}
-        </tbody>
-      </table>
-    </div>
+        </div>
+      </div>
+    </section>
   );
 };
 

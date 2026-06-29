@@ -10,14 +10,14 @@ const Reservation = () => {
   const [email, setEmail] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
-  const [phone, setPhone] = useState(""); // ✅ FIXED
+  const [phone, setPhone] = useState("");
   const navigate = useNavigate();
 
   const handleReservation = async (e) => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/v1/reservation/send", // ✅ FIXED URL
+        "http://localhost:5000/api/reservations/", 
         { firstName, lastName, email, phone, date, time },
         {
           headers: {
@@ -28,8 +28,6 @@ const Reservation = () => {
       );
 
       toast.success(data.message);
-
-      // ✅ Clear form
       setFirstName("");
       setLastName("");
       setPhone("");
@@ -39,7 +37,7 @@ const Reservation = () => {
 
       navigate("/success");
     } catch (error) {
-      // ✅ SAFE ERROR HANDLING
+
       toast.error(error?.response?.data?.message || "Something went wrong");
     }
   };
